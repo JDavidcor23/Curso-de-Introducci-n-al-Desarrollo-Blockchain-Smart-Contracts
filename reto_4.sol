@@ -8,7 +8,9 @@ contract CrodFunding {
     string public name;
     string public description;
     address payable public author;
+    //Change type
     uint public state;
+    //----
     uint public funds;
     uint public fundraisingGoal;
 
