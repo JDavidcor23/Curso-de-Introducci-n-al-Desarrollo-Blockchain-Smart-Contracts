@@ -3,6 +3,7 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract CrodFunding {
+    //ENUM
     enum State { Opened, Closed }
 
     struct Project {
@@ -10,6 +11,7 @@ contract CrodFunding {
         string  name;
         string  description;
         address payable  author;
+        //TYPE
         State  state;
         uint  funds;
         uint  fundraisingGoal;
@@ -17,7 +19,10 @@ contract CrodFunding {
     Project public project;
 
     constructor(string memory _id, string memory _name, string memory _description, uint _fundraisingGoal){
-        project = Project(_id, _name, _description, payable(msg.sender), State.Opened, 0, _fundraisingGoal);
+        project = Project(_id, _name, _description, payable(msg.sender),
+        //initialization 
+        State.Opened, 
+        0, _fundraisingGoal);
 
     }
     event FundProject(
