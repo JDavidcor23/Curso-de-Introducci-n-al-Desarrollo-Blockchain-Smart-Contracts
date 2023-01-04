@@ -11,8 +11,6 @@ contract CrodFunding {
     uint public state;
     uint public funds;
     uint public fundraisingGoal;
-    error ErrorFundProject(string message);
-    error ErrorChangeProjectState(string message);
 
     constructor(string memory _id, string memory _name, string memory _description, uint _fundraisingGoal){
         id = _id;
@@ -46,7 +44,9 @@ contract CrodFunding {
     }
 
     function fundProject() public payable isOwner {
+          // Check if the contract status is different from 1 (i.e. not equal to "CLOSED").
         require(state != 1, 'the state is CLOSED' );
+        // It is checked if the value of the payment (msg.value) is greater than 1
         require(msg.value > 1, 'the value must be greater than 0' );
         author.transfer(msg.value);
         funds+= msg.value;
@@ -55,6 +55,7 @@ contract CrodFunding {
 
 
     function changeProjectState(uint  newState) public stateOwner{
+        //checks if the current state of the project is equal to the new state you want to establish
         require(state != newState, 'New state must be different' );
         state = newState;
         emit ChangeProjectState('the project state has been changed');
